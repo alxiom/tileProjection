@@ -1,5 +1,5 @@
 add_library("video")
-
+    
 
 def setup():
     size(900, 900)
@@ -22,8 +22,8 @@ def setup():
     footage = Movie(this, "grid_test.mov")
     footage.loop()
     
-    tile_width = float(width) / len(key_col)
-    tile_height = float(height) / len(key_row)
+    tile_width = width / len(key_col)
+    tile_height = height / len(key_row)
 
 
 def draw():
@@ -44,12 +44,13 @@ def draw():
                     footage.read()
                     x_position = tile_width * (i - 1)
                     y_position = tile_height * (j - 1)
+                    footage.mask(footage)
                     image(footage, x_position, y_position)
                 now_playing[i][j] += 1.0 / frameRate
             
             if now_playing[i][j] >= footage.duration():
                 background(0)
-                now_playing[i][j] = -1                  
+                now_playing[i][j] = -1
 
 
 def keyPressed():
